@@ -40,8 +40,10 @@ public class Student {
         // TODO change this student's rating and average rating of all students
 
     }
-    
 
+    public static void removeStudent(Student student) {
+        // TODO remove student
+    }
     @Override
     public String toString() {
         return name + " rating: " + rating;
