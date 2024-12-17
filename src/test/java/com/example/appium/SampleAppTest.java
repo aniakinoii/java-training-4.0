@@ -15,6 +15,7 @@ import org.testng.annotations.Test;
 import java.nio.file.Paths;
 
 import static java.lang.System.getenv;
+import static org.testng.Assert.assertEquals;
 
 public class SampleAppTest {
     private AppiumDriverLocalService server;
@@ -29,8 +30,9 @@ public class SampleAppTest {
         if (platform.equals("ANDROID")) {
             var options = new UiAutomator2Options()
                     .setPlatformName("Android")
-                    .setDeviceName("PUT_YOUR_DEVICE_NAME_HERE")
-                    .setApp(Paths.get(path).resolve("ApiDemos-debug.apk").toString());
+                    .setDeviceName("SM-A346E")
+                    .setApp(Paths.get(path).resolve("ApiDemos-debug.apk").toString())
+                    .setAppActivity(".view.TextFields");
 
             server = AppiumDriverLocalService.buildService(new AppiumServiceBuilder().usingAnyFreePort());
             server.start();
@@ -40,9 +42,10 @@ public class SampleAppTest {
         } else {
             var options = new XCUITestOptions()
                     .setPlatformName("iOS")
-                    .setPlatformVersion("PUT_YOUR_XCODE_VERSION_HERE")
+                    .setPlatformVersion("18.2")
                     .setAutomationName("XCuiTest")
-                    .setDeviceName("PUT_YOUR_DEVICE_NAME_HERE")
+                   // .setDeviceName("iPhone 16")
+                    .setUdid("BAE1BFFC-0AC4-45A6-BD92-D3FF47948492")
                     .setApp(Paths.get(path).resolve("TestApp.app.zip").toString());
 
             server = AppiumDriverLocalService.buildService(new AppiumServiceBuilder().usingAnyFreePort());
@@ -53,9 +56,9 @@ public class SampleAppTest {
 
     @Test
     public void textFieldTest() {
-        // TODO initialise PageView and set "text" to its textField
-
-        // TODO assert that textField equals to "text"
+        PageView newPage = new PageView(driver);
+        newPage.setTextField("text");
+        assertEquals(newPage.getTextField(), "text", "wrong text");
     }
 
     @AfterClass
