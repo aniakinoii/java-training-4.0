@@ -7,8 +7,7 @@ public class Temperature {
      * @return temperature degree in Celsius
      */
     public static double fahrenheitToCelsius(double fahrenheit) {
-        // TODO fill in code here and replace the return statement
-        return 0;
+        return (5.0 * (fahrenheit - 32.0) / 9.0);
     }
 
     /**
@@ -18,7 +17,6 @@ public class Temperature {
      * @return temperature degree in Fahrenheit
      */
     public static double celsiusToFahrenheit(double celsius) {
-        // TODO fill in code here and replace the return statement
-        return 0;
+        return (celsius * 9 / 5) + 32;
     }
 }
